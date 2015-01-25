@@ -44,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
                     numeros[i] +=buttonText;
                     exibeCalc = numeros[i];
                     break;
+
                 }else{
                     Toast.makeText(this,"operador não vazio"+i,Toast.LENGTH_SHORT).show();
                     if(numeros[i+1] == null){
