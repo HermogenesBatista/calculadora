@@ -33,21 +33,24 @@ public class MainActivity extends ActionBarActivity {
         for(int i =0; i<10; i++){
 
             if(numeros[i] == null){
+                Toast.makeText(this,"numero vazio"+i,Toast.LENGTH_SHORT).show();
                 numeros[i] = buttonText;
                 exibeCalc = numeros[i];
                 break;
             }else{
-
+                Toast.makeText(this,"numero não vazio"+i,Toast.LENGTH_SHORT).show();
                 if(operadores[i] == null){
+                    Toast.makeText(this,"operador vazio"+i,Toast.LENGTH_SHORT).show();
                     numeros[i] +=buttonText;
                     exibeCalc = numeros[i];
                     break;
                 }else{
+                    Toast.makeText(this,"operador não vazio"+i,Toast.LENGTH_SHORT).show();
+                    if(numeros[i+1] == null){
 
-                    if(operadores[i+1] == null){
-
-                        numeros[i+1] +=buttonText;
-                        exibeCalc += numeros[i+1]+operadores[1];
+                        numeros[i+1] =buttonText;
+                        exibeCalc = numeros[i]+operadores[i]+numeros[i+1];
+                        break;
                     }
 
                 }
