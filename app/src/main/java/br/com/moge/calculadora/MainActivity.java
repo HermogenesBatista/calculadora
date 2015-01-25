@@ -115,4 +115,9 @@ public class MainActivity extends ActionBarActivity {
 
         mostraCalc.setText(exibeCalc);
     }
+
+    public void efetuaOperador(){
+
+        //Vai efeturar a soma, de acordo com os operadores.
+    }
 }
