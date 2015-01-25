@@ -35,14 +35,13 @@ public class MainActivity extends ActionBarActivity {
             if(numeros[i] == null){
                 Toast.makeText(this,"numero vazio"+i,Toast.LENGTH_SHORT).show();
                 numeros[i] = buttonText;
-                exibeCalc = numeros[i];
                 break;
             }else{
                 Toast.makeText(this,"numero não vazio"+i,Toast.LENGTH_SHORT).show();
                 if(operadores[i] == null){
                     Toast.makeText(this,"operador vazio"+i,Toast.LENGTH_SHORT).show();
                     numeros[i] +=buttonText;
-                    exibeCalc = numeros[i];
+
                     break;
 
                 }else{
@@ -50,7 +49,6 @@ public class MainActivity extends ActionBarActivity {
                     if(numeros[i+1] == null){
 
                         numeros[i+1] =buttonText;
-                        exibeCalc = numeros[i]+operadores[i]+numeros[i+1];
                         break;
                     }
 
@@ -60,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
 
         }
 
-        mostraCalc.setText(exibeCalc);
+        setMostraCalc();
 
     }
 
@@ -80,13 +78,11 @@ public class MainActivity extends ActionBarActivity {
                 if(operadores[i] == null){
                     Toast.makeText(this,"operador vazio"+i, Toast.LENGTH_SHORT).show();
                     operadores[i] = buttonText;
-                    exibeCalc = numeros[i]+operadores[i];
                     break;
                 }else{
                     Toast.makeText(this,"operador não vazio"+i, Toast.LENGTH_SHORT).show();
                     if(numeros[i+1] == null){
                         operadores[i+1] +=buttonText;
-                        exibeCalc += numeros[i+1]+operadores[1];
 
                     }
 
@@ -94,6 +90,27 @@ public class MainActivity extends ActionBarActivity {
 
             }
 
+        }
+
+        setMostraCalc();
+    }
+
+    public void setMostraCalc(){
+        exibeCalc = "";
+        for(int i=0; i<10; i++){
+
+            if(numeros[i] != null){
+                exibeCalc += numeros[i];
+
+                if(operadores[i] != null){
+                    exibeCalc += operadores[i];
+                }else{
+
+                    break;
+                }
+            }else{
+                break;
+            }
         }
 
         mostraCalc.setText(exibeCalc);
