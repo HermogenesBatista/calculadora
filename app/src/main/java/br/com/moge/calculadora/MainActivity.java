@@ -13,6 +13,7 @@ public class MainActivity extends ActionBarActivity {
     private String[] numeros;
     private String[] operadores;
     private String exibeCalc;
+    private int prioridade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +120,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void efetuaOperador(){
+        prioridade = 0;
 
         //Vai efeturar a soma, de acordo com os operadores.
     }
