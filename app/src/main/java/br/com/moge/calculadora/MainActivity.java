@@ -121,6 +121,11 @@ public class MainActivity extends ActionBarActivity {
 
     public void efetuaOperador(){
         prioridade = 0;
+        String[] tempOpPrioridade = new String[10];
+        for(int i=0; i<10; i++){
+
+
+        }
 
         //Vai efeturar a soma, de acordo com os operadores.
     }
