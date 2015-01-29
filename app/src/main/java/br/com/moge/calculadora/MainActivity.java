@@ -76,9 +76,18 @@ public class MainActivity extends ActionBarActivity {
             }else{
                 Toast.makeText(this,"numero não vazio"+i, Toast.LENGTH_SHORT).show();
                 if(operadores[i] == null){
-                    Toast.makeText(this,"operador vazio"+i, Toast.LENGTH_SHORT).show();
-                    operadores[i] = buttonText;
-                    break;
+
+                    if(i > 0 && b.equals('='))
+                    {
+                        efetuaOperador();
+                        break;
+                    }else
+                    {
+                        Toast.makeText(this,"operador vazio"+i, Toast.LENGTH_SHORT).show();
+                        operadores[i] = buttonText;
+                        break;
+                    }
+
                 }
 
             }
