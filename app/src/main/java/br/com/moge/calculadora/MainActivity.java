@@ -47,6 +47,7 @@ public class MainActivity extends ActionBarActivity {
                 {
                     numeros[i] = buttonText;
                 }
+                break;
             }else{
                 Toast.makeText(this,"numero não vazio"+i,Toast.LENGTH_SHORT).show();
                 if(operadores[i] == null){
@@ -55,17 +56,20 @@ public class MainActivity extends ActionBarActivity {
                     if(control){
                         control = false;
 
-                        if(!numeros[i].contains(".")){
+                        if(buttonText.equals(".")){
                             numeros[i] ="0"+buttonText;
                         }else {
                             numeros[i] = buttonText;
                         }
                     }else{
 
-                        if(!numeros[i].contains(".")){
-                            numeros[i] ="0"+buttonText;
-                        }else {
-                            numeros[i] += buttonText;
+                        if(buttonText.equals(".")){
+                            if(!numeros[i].contains(".")){
+                                numeros[i] +=buttonText;
+                            }
+
+                        }else{
+                            numeros[i] +=buttonText;
                         }
 
                     }
@@ -82,6 +86,7 @@ public class MainActivity extends ActionBarActivity {
                         }else{
 
                             numeros[i+1] =buttonText;
+
                         }
 
                         break;
