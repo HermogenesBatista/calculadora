@@ -7,13 +7,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends ActionBarActivity {
     private TextView mostraCalc;
     private String[] numeros;
     private String[] operadores;
     private String exibeCalc;
-    private int prioridade;
+    private ArrayList<String> execOperacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class MainActivity extends ActionBarActivity {
         mostraCalc = (TextView) findViewById(R.id.visualizar);
         numeros = new String[10];
         operadores = new String[10];
+        execOperacao = new ArrayList<String>();
     }
 
 
@@ -75,20 +78,23 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(this,"numero vazio"+i,Toast.LENGTH_SHORT).show();
                 break;
             }else{
+
                 Toast.makeText(this,"numero não vazio"+i, Toast.LENGTH_SHORT).show();
-                if(operadores[i] == null){
+                if(i > 0){
+                    Toast.makeText(this,"entrou no "+i+" maior que 0", Toast.LENGTH_SHORT).show();
+                    if(numeros[i] !=null){
+                        String result = resultadoOperacao(numeros[0],numeros[1],operadores[0]);
+                        numeros[0] = result;
+                        numeros[1] = null;
+                        operadores[0] = buttonText;
+                        break;
 
-                    if(i > 0 && b.equals('='))
-                    {
-                        efetuaOperador();
-                        break;
-                    }else
-                    {
-                        Toast.makeText(this,"operador vazio"+i, Toast.LENGTH_SHORT).show();
-                        operadores[i] = buttonText;
-                        break;
                     }
+                }else if(operadores[i] == null){
+                    Toast.makeText(this,"operador vazio"+i, Toast.LENGTH_SHORT).show();
 
+                    operadores[i] = buttonText;
+                    break;
                 }
 
             }
@@ -118,15 +124,64 @@ public class MainActivity extends ActionBarActivity {
 
         mostraCalc.setText(exibeCalc);
     }
-
+    /*
     public void efetuaOperador(){
-        prioridade = 0;
+        execOperacao = new ArrayList<String>();
         String[] tempOpPrioridade = new String[10];
-        for(int i=0; i<10; i++){
+        boolean balance = false;
+        while(balance == false){
+
+            for(int i=0; i< 10; i++){
+
+                switch (operadores[i]){
+                    case "-":break;
+                    case "+":break;
+                    default:
+                        execOperacao.add(numeros[i]);
+                        execOperacao.add(operadores[i]);
+                        execOperacao.add(numeros[i+1]);
+                        break;
+
+                }
+
+            }
+        }
+
+        double resultado = 0;
+        for(int i=0; i< execOperacao.size(); i++){
+
+            if(i == 0){
+                resultado = resultadoOperacao(execOperacao[i], execOperacao[i+2], execOperacao[i+1]);
+            }else{
+
+                resultado = resultadoOperacao(resultado, execOperacao[i+2], execOperacao[i+1]);
+            }
 
 
         }
 
-        //Vai efeturar a soma, de acordo com os operadores.
+    }
+
+*/
+    //explicando val1 = indice[i]
+    //val2 = indice[i+2]
+    //operator = indice[i+1]
+    public String resultadoOperacao(String val1, String val2, String operator)
+    {
+        double result = 0;
+        double[] var = new double[2];
+        var[0] = Double.parseDouble(val1);
+        var[1] = Double.parseDouble(val2);
+
+        switch (operator){
+            case "+": result = var[0]+var[1];break;
+            case "-": result = var[0]-var[1];break;
+            case "*": result = var[0]*var[1];break;
+            case "/": result = var[0]/var[1];break;
+
+        }
+
+        Toast.makeText(this, "resultado "+result,Toast.LENGTH_LONG);
+        return String.valueOf(result);
     }
 }
