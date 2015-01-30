@@ -15,7 +15,8 @@ public class MainActivity extends ActionBarActivity {
     private String[] numeros;
     private String[] operadores;
     private String exibeCalc;
-    private ArrayList<String> execOperacao;
+    //private ArrayList<String> execOperacao;
+    private boolean control = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
         mostraCalc = (TextView) findViewById(R.id.visualizar);
         numeros = new String[10];
         operadores = new String[10];
-        execOperacao = new ArrayList<String>();
+        //execOperacao = new ArrayList<String>();
     }
 
 
@@ -38,13 +39,36 @@ public class MainActivity extends ActionBarActivity {
 
             if(numeros[i] == null){
                 Toast.makeText(this,"numero vazio"+i,Toast.LENGTH_SHORT).show();
-                numeros[i] = buttonText;
-                break;
+
+                if(buttonText.equals(".")) {
+                    numeros[i] = '0'+buttonText;
+                    break;
+                }else
+                {
+                    numeros[i] = buttonText;
+                }
             }else{
                 Toast.makeText(this,"numero não vazio"+i,Toast.LENGTH_SHORT).show();
                 if(operadores[i] == null){
                     Toast.makeText(this,"operador vazio"+i,Toast.LENGTH_SHORT).show();
-                    numeros[i] +=buttonText;
+
+                    if(control){
+                        control = false;
+
+                        if(!numeros[i].contains(".")){
+                            numeros[i] ="0"+buttonText;
+                        }else {
+                            numeros[i] = buttonText;
+                        }
+                    }else{
+
+                        if(!numeros[i].contains(".")){
+                            numeros[i] ="0"+buttonText;
+                        }else {
+                            numeros[i] += buttonText;
+                        }
+
+                    }
 
                     break;
 
@@ -52,7 +76,14 @@ public class MainActivity extends ActionBarActivity {
                     Toast.makeText(this,"operador não vazio"+i,Toast.LENGTH_SHORT).show();
                     if(numeros[i+1] == null){
 
-                        numeros[i+1] =buttonText;
+                        if(buttonText.equals(".")){
+                            numeros[i+1] ='0'+buttonText;
+
+                        }else{
+
+                            numeros[i+1] =buttonText;
+                        }
+
                         break;
                     }
 
@@ -86,7 +117,15 @@ public class MainActivity extends ActionBarActivity {
                         String result = resultadoOperacao(numeros[0],numeros[1],operadores[0]);
                         numeros[0] = result;
                         numeros[1] = null;
-                        operadores[0] = buttonText;
+
+                        if(buttonText.equals("="))
+                        {
+                            control = true;
+                            operadores[0] = null;
+                        }else{
+                            operadores[0] = buttonText;
+                        }
+
                         break;
 
                     }
